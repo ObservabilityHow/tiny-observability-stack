@@ -1,0 +1,11 @@
+groups:
+  - name: tiny.rules
+    rules:
+      - alert: HighRequestRate
+        expr: rate(tiny_hits_total[1m]) > 5
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High request rate on tiny-app"
+          description: "Request rate >5 RPS for 1 min."
