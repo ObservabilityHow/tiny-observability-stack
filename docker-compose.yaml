@@ -14,7 +14,8 @@ services:
     image: prom/alertmanager:v0.28.1
     volumes:
       - ./alertmanager.yaml:/etc/alertmanager/alertmanager.yml
-    ports: ["9093:9093"]
+    ports:
+      - "9093:9093"
 
   loki:
     image: grafana/loki:3.5.0
@@ -63,8 +64,9 @@ services:
 
   # -------------- Alert sink for Tiny stack --------------
   alert-logger:
-    image: hashicorp/http-echo:1.0.0
-    command: "-text ReceivedAlert"
+    image: mendhak/http-https-echo:36
+    environment:
+      HTTP_PORT: 5678
     ports:
       - "5678:5678"
 
